@@ -1,0 +1,709 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Free LQ Test - Luck Quotient Test</title>
+<style>
+body{
+  margin:0;
+  background:#b9b6a8;
+  color:#000;
+  font-family:Arial, Helvetica, sans-serif;
+  font-size:14px;
+}
+a{color:#0000cc;text-decoration:underline}
+a:visited{color:#551a8b}
+#wrap{
+  width:760px;
+  max-width:96%;
+  margin:0 auto;
+  background:#e7e5dc;
+  min-height:100vh;
+  padding:0 18px;
+}
+#top{padding-top:14px}
+#title{
+  font-family:"Times New Roman", Times, serif;
+  font-size:34px;
+  font-weight:bold;
+  color:#000099;
+  margin-bottom:0;
+}
+#subtitle{font-size:13px;margin-top:0;color:#222}
+#nav{margin:12px 0 18px;font-size:13px}
+hr{border:0;border-top:1px solid #777;height:0}
+h1{
+  font-size:22px;
+  color:#000080;
+  margin:18px 0 8px;
+}
+h2{
+  font-size:17px;
+  color:#000080;
+  margin:24px 0 8px;
+}
+p{line-height:1.5}
+.center{text-align:center}
+button{
+  font-family:Arial, Helvetica, sans-serif;
+  font-size:14px;
+  padding:5px 16px;
+  color:#000;
+  background:#e9e9e9;
+  border:2px outset #ddd;
+  border-radius:0;
+  cursor:pointer;
+}
+button:active{border-style:inset}
+.hidden{display:none!important}
+
+.stats{margin:14px 0 18px;line-height:1.7}
+.stats b{display:inline-block;width:145px}
+
+.oldpic{
+  width:96px;
+  height:96px;
+  object-fit:fill;
+  image-rendering:pixelated;
+  filter:contrast(.97) saturate(.92);
+  border:0;
+  vertical-align:middle;
+}
+.floatpic{
+  float:right;
+  margin:0 8px 10px 18px;
+}
+
+#timerBox{
+  font-family:"Courier New",monospace;
+  font-weight:bold;
+  color:#990000;
+  text-align:right;
+  font-size:15px;
+  margin:8px 0 3px;
+}
+#progressText{font-size:12px;margin-bottom:1px}
+#sectionProgressText{font-size:12px;margin-bottom:4px;color:#333}
+#progressOuter{
+  width:100%;
+  height:12px;
+  border:1px solid #666;
+  background:#fff;
+}
+#progressBar{
+  height:100%;
+  width:0;
+  background:#0000aa;
+}
+
+#sectionIntro{
+  margin-top:18px;
+}
+.weird{
+  margin:10px 0;
+  line-height:1.55;
+}
+.weird b{color:#990000}
+#sectionCode{
+  font-size:12px;
+  color:#444;
+  margin-bottom:4px;
+}
+#sectionIntro h2{
+  margin-top:6px;
+  background:#c6c6ea;
+  display:inline;
+  padding:1px 4px;
+}
+
+#test{padding-top:6px}
+#sectionName{font-size:12px;color:#333;margin-top:12px}
+#qno{font-weight:bold;margin-top:20px}
+#prompt{font-size:18px;margin:10px 0 16px}
+#choices{margin:10px 0 15px}
+.choice{margin:0 6px 6px 0;min-width:60px}
+#trialResult{margin:14px 0 8px;min-height:22px;font-weight:bold}
+.good{color:#006600}
+.bad{color:#990000}
+
+#scoreWrap{text-align:center;margin:26px 0 10px}
+#scoreLabel{font-size:14px;font-weight:bold}
+#lqNumber{
+  font-family:"Times New Roman",Times,serif;
+  font-size:72px;
+  color:#000080;
+  line-height:1;
+}
+#lqDesc{font-size:18px;font-weight:bold}
+#percentileText{margin-top:6px;font-size:13px}
+#chart{margin:24px 0 14px}
+svg{display:block;width:100%;height:auto}
+
+table{
+  border-collapse:collapse;
+  width:100%;
+  margin-top:18px;
+  font-size:13px;
+}
+th,td{
+  border:1px solid #777;
+  padding:5px 7px;
+  text-align:left;
+}
+th{background:#c8c6ba}
+.bar{
+  height:7px;
+  border:1px solid #999;
+  background:white;
+  margin-top:3px;
+  width:170px;
+}
+.bar span{display:block;height:100%;background:#0000aa}
+.formula{
+  font-family:"Times New Roman",Times,serif;
+  font-size:17px;
+  margin:12px 0;
+}
+#footer{
+  margin-top:30px;
+  padding:12px 0 22px;
+  font-size:11px;
+  color:#222;
+}
+@media(max-width:600px){
+  #wrap{width:94%}
+  #title{font-size:29px}
+  #lqNumber{font-size:62px}
+  .bar{width:120px}
+}
+</style>
+</head>
+<body>
+<div id="wrap">
+
+<div id="top">
+  <div id="title">LQ TEST</div>
+  <div id="subtitle">Free Luck Quotient Test</div>
+  <div id="nav">
+    <a href="#" onclick="showHome();return false;">Home</a> |
+    <a href="#" onclick="showInfo('about');return false;">About LQ</a> |
+    <a href="#" onclick="showInfo('guide');return false;">Test Guide</a> |
+    <a href="#" onclick="showInfo('faq');return false;">FAQ</a>
+  </div>
+  <hr>
+</div>
+
+<div id="home">
+  <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABUOEBIQDRUSERIYFhUZHzQiHx0dH0AuMCY0TENQT0tDSUhUXnlmVFlyWkhJaY9qcnyAh4iHUWWUn5ODnXmEh4L/2wBDARYYGB8cHz4iIj6CVklWgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoL/wAARCABgAGADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDoaKKKgYUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFNkbajHvjinVFMclV98n8KipPkg5Diruw6By8KseuMH6jrT6gtziSRP8AgQ/Hr+tT0Up88FIclZ2CiiirJCiiigAooooAQsq43EDPTNJvT+8PzpWUMpVhkGoGVoupLJ/e7j6/41jVnOCvFXKik9GTb0/vD86iJ3SMR0HAoorzauKdSPLaxvGnyu40nZNG/b7p+h/+vU+9P7w/OoqKKOKdOPLa4Sp8zuS70/vD86UMrZ2kHHXFV1DTfcO1P73r9P8AGrCIqLtUYFelRnOavJWMJJLYWiiitiQooooAKKKKAIHQRsuzgMfu+n0opZDmX/dGKYzYIVRuc9AK8bEJSrNQR1Q0jqOpqKJZHD/dQj5fX3NKDztYbWHahTtuFPZxt/Ecj+tGHSjWSmgnrG6LFFFFeycoUUUUAFFFFABRRSEBgQeh4oArIWlJ8vuclj0H+JqxHGsYwvU9SeppVAUAKAAOgFLWVOjGGvVlSk2NdFcYbt0I6iq0+6NctyVIZWHfH8qt0EAggjIPUGipRjPXqgjJoAQQCOh5FFIqhVCjoOBS1qSFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFAH//Z" class="oldpic floatpic" alt="Good luck">
+  <h1>How Lucky Are You?</h1>
+
+  <p>
+    This test measures your Luck Quotient (LQ) using a series of random trials.
+    Your result is compared with the theoretical average and shown on a scale
+    with a mean of 100 and a standard deviation of 15.
+  </p>
+
+  <div class="stats">
+    <div><b>Number of trials:</b> 60</div>
+    <div><b>Average LQ:</b> 100</div>
+    <div><b>Standard deviation:</b> 15</div>
+    <div><b>Time limit:</b> 5 minutes</div>
+  </div>
+
+  <h2>The Test</h2>
+  <p>
+    The test contains five different luck examinations. You must make each
+    decision before the test clock reaches zero.
+  </p>
+
+  <p class="center" style="margin-top:28px">
+    <button id="startBtn">Start LQ Test</button>
+  </p>
+</div>
+
+
+<div id="infoPage" class="hidden">
+  <div id="about" class="infoSection hidden">
+    <h1>About LQ</h1>
+    <p>
+      LQ means <b>Luck Quotient</b>. It is a score which shows how far a set
+      of random results moved above or below the mathematical average.
+    </p>
+    <p>
+      LQ 100 is the theoretical average. The display scale uses a standard
+      deviation of 15.
+    </p>
+    <p>
+      The probabilities used by this test are known in advance, so the average
+      and standard deviation can be calculated without collecting test results
+      from other visitors.
+    </p>
+    <p><a href="#" onclick="showHome();return false;">&lt;&lt; Back to Home</a></p>
+  </div>
+
+  <div id="guide" class="infoSection hidden">
+    <h1>Test Guide</h1>
+    <p>The LQ Test contains 60 trials in five sections.</p>
+    <ol style="line-height:1.7">
+      <li><b>Two Choice</b> - select A or B.</li>
+      <li><b>Four Cards</b> - select one of four cards.</li>
+      <li><b>Dice</b> - guess the next die result.</li>
+      <li><b>Trap Avoidance</b> - avoid one trap among five positions.</li>
+      <li><b>Rare Event</b> - test for a 10 percent GOLD event.</li>
+    </ol>
+    <p>
+      The time limit is five minutes. The clock begins with the first actual
+      test section and continues between sections.
+    </p>
+    <p><a href="#" onclick="showHome();return false;">&lt;&lt; Back to Home</a></p>
+  </div>
+
+  <div id="faq" class="infoSection hidden">
+    <h1>Frequently Asked Questions</h1>
+
+    <p><b>Q. Why is the average 100?</b><br>
+    A. The theoretical mean is converted to 100 for the LQ scale.</p>
+
+    <p><b>Q. Why is the standard deviation 15?</b><br>
+    A. LQ uses 15 as its display scale.</p>
+
+    <p><b>Q. Will I get the same result again?</b><br>
+    A. Probably not. Each test generates new random outcomes.</p>
+
+    <p><b>Q. Does waiting before clicking improve my chances?</b><br>
+    A. No. The probability of each trial does not change.</p>
+
+    <p><a href="#" onclick="showHome();return false;">&lt;&lt; Back to Home</a></p>
+  </div>
+</div>
+
+<div id="sectionIntro" class="hidden">
+  <div id="sectionCode"></div>
+  <img id="introImg" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABUOEBIQDRUSERIYFhUZHzQiHx0dH0AuMCY0TENQT0tDSUhUXnlmVFlyWkhJaY9qcnyAh4iHUWWUn5ODnXmEh4L/2wBDARYYGB8cHz4iIj6CVklWgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoL/wAARCABgAGADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDoaKKKgYVFcy+TA8gGSBxVa/vHhcRxYDYySe1UXu53Qq8m5T1BArGdaKuuplKoloRySPI252LH3q1YXbJIIpGJRuBnsapUVxxm4u5gpNO5uXdyLaMHGWPAFZp1C5JyHA9goo1CQySRn/pmD+dVa1q1ZOVky5zd9DYsbw3GUcAOBnjuKt1hWkohuFkbOBnOPpWjDqMUj7WUpnoT0ralVTVpPU0hNW1LlFFFbmoUUUUAZOqoVuA/Zl/UVSroJYkmQo4yP5VmzaZKpzEQ49Dwa5KtKV7o55wd7oo0U+SN4ziRGU+4plc1rGJJMclP9wVHT5vvgeigfpTKctxvcKKKntrWS4bgYTu1CTbsgSvojVsmL2kbNycYqemoixoEUYAGBTq9KKskjsWiCormYQQmQjPYD1NS1V1KNpLU7Rnad1Kbai2gk2loZktzNKctIcegOBUYdh0Zh+NNorzm29zju2TLdTqMeYWHo3I/WmuyydIwrf7PT8qjq/ZwARI7DmVwB/ujk/yq4809CleWhTAV2JZwpPsTUgS3H3pnP+6n+NRzpsmdPRjTKm9nqidi5HJYxnPlSOfVsfyq/BeQSkIh2nspGKxKASDkcEVpGs49C41Gjo6KZE++JH/vKDT67lqdQUUUUAZeqJHHsCIqlskkCqFbN/bG4jBTG9eme9ZZt5lbaYnz9K4q0HzXsc1SL5hsMZllWMdWNbTKFmgQDAUNj8sVBp9oYQZJB854A9BVh/8Aj6i/3W/pWtKHLG7LhGyuzO1SPbcBx0cfqKpVuXcH2iAp/EOVPvWIwKsVYYI4INY1ocsr9zOpGzuIAScDkmrUFhNIw3qY17k9arAFiAoyTwK6BAQihjkgDNOjTU9x04qW4qgKoUcADApaKK7TpCiiigAooooAKim4khb0fH5jFS1HOheFlH3sZH1HSlLYT2JKgntYZzl1+b1HBqWNxJGrjowzTqGlJahZNEEFpDAdyLlvUnNT0UUJJaIEktgooopjCiiigAooooAKKKKAIU/dTGM/df5k+vcf1qamSxiRNpOO4I6g+tJE7NlHGHXr6H3FJaaC20JKKKKYwooooA//2Q==" class="oldpic floatpic" alt="">
+  <h2 id="introTitle">TEST SECTION</h2>
+  <div class="weird" id="introText"></div>
+  <p style="margin-top:22px">
+    <button id="beginSectionBtn">Continue to Test &gt;&gt;</button>
+  </p>
+</div>
+
+<div id="test" class="hidden">
+  <div id="timerBox">TIME LEFT: <span id="timer">05:00</span></div>
+  <div id="sectionName"></div>
+  <div id="progressText">1 / 60</div>
+  <div id="sectionProgressText">1 / 16</div>
+  <div id="progressOuter"><div id="progressBar"></div></div>
+
+  <div id="qno"></div>
+  <div id="prompt"></div>
+  <div id="choices"></div>
+  <div id="trialResult"></div>
+  <button id="nextBtn" class="hidden">Next</button>
+</div>
+
+<div id="results" class="hidden">
+  <h1>Your LQ Result</h1>
+
+  <div id="scoreWrap">
+    <div id="scoreLabel">YOUR LQ</div>
+    <div id="lqNumber">100</div>
+    <div id="lqDesc">Average</div>
+    <div id="percentileText"></div>
+  </div>
+
+  <div id="chart">
+    <svg viewBox="0 0 760 250">
+      <line x1="48" y1="195" x2="712" y2="195" stroke="#555" stroke-width="1"/>
+      <path id="bellPath" fill="none" stroke="#000080" stroke-width="2"/>
+      <line id="markerLine" x1="380" y1="36" x2="380" y2="195" stroke="#cc0000" stroke-width="2"/>
+      <polygon id="markerTri" points="374,34 386,34 380,43" fill="#cc0000"/>
+      <text id="markerText" x="380" y="22" text-anchor="middle" font-size="13" fill="#cc0000">YOU</text>
+      <g id="ticks"></g>
+    </svg>
+  </div>
+
+  <table>
+    <thead><tr><th>Section</th><th>LQ</th><th>Result</th></tr></thead>
+    <tbody id="categoryRows"></tbody>
+  </table>
+
+  <h2>Score Calculation</h2>
+  <p>Each trial is standardized using its known success probability:</p>
+  <div class="formula">s = (x - p) / sqrt(p(1 - p))</div>
+  <p>The combined score is converted to a z-score and then to the LQ scale:</p>
+  <div class="formula">LQ = 100 + 15z</div>
+
+  <p class="center" style="margin-top:24px">
+    <button id="restartBtn">Take the Test Again</button>
+  </p>
+</div>
+
+<div id="footer">
+  <hr>
+  <a href="#" onclick="showHome();return false;">HOME</a> |
+  <a href="#" onclick="showInfo('about');return false;">ABOUT LQ</a> |
+  <a href="#" onclick="showInfo('guide');return false;">TEST GUIDE</a> |
+  <a href="#" onclick="showInfo('faq');return false;">FAQ</a><br><br>
+  Copyright (C) 2006-2026 LQ TEST
+</div>
+
+</div>
+
+<script>
+(() => {
+  const sections = [
+    {
+      key:'binary', name:'Two Choice', count:16, p:0.5,
+      title:'TEST 1 : BASIC CHOICE',
+      img:'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABUOEBIQDRUSERIYFhUZHzQiHx0dH0AuMCY0TENQT0tDSUhUXnlmVFlyWkhJaY9qcnyAh4iHUWWUn5ODnXmEh4L/2wBDARYYGB8cHz4iIj6CVklWgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoL/wAARCABgAGADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDoaKKKgYUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFNkbajHvjinVFMclV98n8KipPkg5Diruw6By8KseuMH6jrT6gtziSRP8AgQ/Hr+tT0Up88FIclZ2CiiirJCiiigAooooAQsq43EDPTNJvT+8PzpWUMpVhkGoGVoupLJ/e7j6/41jVnOCvFXKik9GTb0/vD86iJ3SMR0HAoorzauKdSPLaxvGnyu40nZNG/b7p+h/+vU+9P7w/OoqKKOKdOPLa4Sp8zuS70/vD86UMrZ2kHHXFV1DTfcO1P73r9P8AGrCIqLtUYFelRnOavJWMJJLYWiiitiQooooAKKKKAIHQRsuzgMfu+n0opZDmX/dGKYzYIVRuc9AK8bEJSrNQR1Q0jqOpqKJZHD/dQj5fX3NKDztYbWHahTtuFPZxt/Ecj+tGHSjWSmgnrG6LFFFFeycoUUUUAFFFFABRRSEBgQeh4oArIWlJ8vuclj0H+JqxHGsYwvU9SeppVAUAKAAOgFLWVOjGGvVlSk2NdFcYbt0I6iq0+6NctyVIZWHfH8qt0EAggjIPUGipRjPXqgjJoAQQCOh5FFIqhVCjoOBS1qSFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFAH//Z',
+      text:'Two boxes are presented. One becomes the winning box only after your selection. <b>Do not calculate.</b> The first movement of your hand is sometimes said to contain information which the conscious mind has not received.'
+    },
+    {
+      key:'card', name:'Four Cards', count:12, p:0.25,
+      title:'TEST 2 : CARD LOCATION',
+      img:'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABUOEBIQDRUSERIYFhUZHzQiHx0dH0AuMCY0TENQT0tDSUhUXnlmVFlyWkhJaY9qcnyAh4iHUWWUn5ODnXmEh4L/2wBDARYYGB8cHz4iIj6CVklWgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoL/wAARCABgAGADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDoaKKKgYVFcy+TA8gGSBxVa/vHhcRxYDYySe1UXu53Qq8m5T1BArGdaKuuplKoloRySPI252LH3q1YXbJIIpGJRuBnsapUVxxm4u5gpNO5uXdyLaMHGWPAFZp1C5JyHA9goo1CQySRn/pmD+dVa1q1ZOVky5zd9DYsbw3GUcAOBnjuKt1hWkohuFkbOBnOPpWjDqMUj7WUpnoT0ralVTVpPU0hNW1LlFFFbmoUUUUAZOqoVuA/Zl/UVSroJYkmQo4yP5VmzaZKpzEQ49Dwa5KtKV7o55wd7oo0U+SN4ziRGU+4plc1rGJJMclP9wVHT5vvgeigfpTKctxvcKKKntrWS4bgYTu1CTbsgSvojVsmL2kbNycYqemoixoEUYAGBTq9KKskjsWiCormYQQmQjPYD1NS1V1KNpLU7Rnad1Kbai2gk2loZktzNKctIcegOBUYdh0Zh+NNorzm29zju2TLdTqMeYWHo3I/WmuyydIwrf7PT8qjq/ZwARI7DmVwB/ujk/yq4809CleWhTAV2JZwpPsTUgS3H3pnP+6n+NRzpsmdPRjTKm9nqidi5HJYxnPlSOfVsfyq/BeQSkIh2nspGKxKASDkcEVpGs49C41Gjo6KZE++JH/vKDT67lqdQUUUUAZeqJHHsCIqlskkCqFbN/bG4jBTG9eme9ZZt5lbaYnz9K4q0HzXsc1SL5hsMZllWMdWNbTKFmgQDAUNj8sVBp9oYQZJB854A9BVh/8Aj6i/3W/pWtKHLG7LhGyuzO1SPbcBx0cfqKpVuXcH2iAp/EOVPvWIwKsVYYI4INY1ocsr9zOpGzuIAScDkmrUFhNIw3qY17k9arAFiAoyTwK6BAQihjkgDNOjTU9x04qW4qgKoUcADApaKK7TpCiiigAooooAKim4khb0fH5jFS1HOheFlH3sZH1HSlLYT2JKgntYZzl1+b1HBqWNxJGrjowzTqGlJahZNEEFpDAdyLlvUnNT0UUJJaIEktgooopjCiiigAooooAKKKKAIU/dTGM/df5k+vcf1qamSxiRNpOO4I6g+tJE7NlHGHXr6H3FJaaC20JKKKKYwooooA//2Q==',
+      text:'Four cards will be shown. Only one card is correct. Some people report that one position appears slightly more "present" than the others. This sensation has not been explained here. Please choose normally.'
+    },
+    {
+      key:'dice', name:'Dice', count:10, p:1/6,
+      title:'TEST 3 : NUMBER ANTICIPATION',
+      img:'data:image/jpeg;base64,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',
+      text:'Select the number which you believe will appear next. Try not to develop a system. Repeated systems may interfere with spontaneous luck and make the result unnecessarily mathematical.'
+    },
+    {
+      key:'avoid', name:'Trap Avoidance', count:10, p:0.8,
+      title:'TEST 4 : NEGATIVE LUCK',
+      img:'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABUOEBIQDRUSERIYFhUZHzQiHx0dH0AuMCY0TENQT0tDSUhUXnlmVFlyWkhJaY9qcnyAh4iHUWWUn5ODnXmEh4L/2wBDARYYGB8cHz4iIj6CVklWgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoL/wAARCABgAGADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDoaKKKgYUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFNkbajHvjinVFMclV98n8KipPkg5Diruw6By8KseuMH6jrT6gtziSRP8AgQ/Hr+tT0Up88FIclZ2CiiirJCiiigAooooAQsq43EDPTNJvT+8PzpWUMpVhkGoGVoupLJ/e7j6/41jVnOCvFXKik9GTb0/vD86iJ3SMR0HAoorzauKdSPLaxvGnyu40nZNG/b7p+h/+vU+9P7w/OoqKKOKdOPLa4Sp8zuS70/vD86UMrZ2kHHXFV1DTfcO1P73r9P8AGrCIqLtUYFelRnOavJWMJJLYWiiitiQooooAKKKKAIHQRsuzgMfu+n0opZDmX/dGKYzYIVRuc9AK8bEJSrNQR1Q0jqOpqKJZHD/dQj5fX3NKDztYbWHahTtuFPZxt/Ecj+tGHSjWSmgnrG6LFFFFeycoUUUUAFFFFABRRSEBgQeh4oArIWlJ8vuclj0H+JqxHGsYwvU9SeppVAUAKAAOgFLWVOjGGvVlSk2NdFcYbt0I6iq0+6NctyVIZWHfH8qt0EAggjIPUGipRjPXqgjJoAQQCOh5FFIqhVCjoOBS1qSFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFAH//Z',
+      text:'This section does not ask you to find a prize. It asks you to <b>avoid an unwanted result.</b> Good luck is sometimes observed as an event which does not happen. Select a safe position.'
+    },
+    {
+      key:'rare', name:'Rare Event', count:12, p:0.1,
+      title:'TEST 5 : RARE EVENT',
+      img:'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABUOEBIQDRUSERIYFhUZHzQiHx0dH0AuMCY0TENQT0tDSUhUXnlmVFlyWkhJaY9qcnyAh4iHUWWUn5ODnXmEh4L/2wBDARYYGB8cHz4iIj6CVklWgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoL/wAARCABgAGADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDoaKKKgYVFcy+TA8gGSBxVa/vHhcRxYDYySe1UXu53Qq8m5T1BArGdaKuuplKoloRySPI252LH3q1YXbJIIpGJRuBnsapUVxxm4u5gpNO5uXdyLaMHGWPAFZp1C5JyHA9goo1CQySRn/pmD+dVa1q1ZOVky5zd9DYsbw3GUcAOBnjuKt1hWkohuFkbOBnOPpWjDqMUj7WUpnoT0ralVTVpPU0hNW1LlFFFbmoUUUUAZOqoVuA/Zl/UVSroJYkmQo4yP5VmzaZKpzEQ49Dwa5KtKV7o55wd7oo0U+SN4ziRGU+4plc1rGJJMclP9wVHT5vvgeigfpTKctxvcKKKntrWS4bgYTu1CTbsgSvojVsmL2kbNycYqemoixoEUYAGBTq9KKskjsWiCormYQQmQjPYD1NS1V1KNpLU7Rnad1Kbai2gk2loZktzNKctIcegOBUYdh0Zh+NNorzm29zju2TLdTqMeYWHo3I/WmuyydIwrf7PT8qjq/ZwARI7DmVwB/ujk/yq4809CleWhTAV2JZwpPsTUgS3H3pnP+6n+NRzpsmdPRjTKm9nqidi5HJYxnPlSOfVsfyq/BeQSkIh2nspGKxKASDkcEVpGs49C41Gjo6KZE++JH/vKDT67lqdQUUUUAZeqJHHsCIqlskkCqFbN/bG4jBTG9eme9ZZt5lbaYnz9K4q0HzXsc1SL5hsMZllWMdWNbTKFmgQDAUNj8sVBp9oYQZJB854A9BVh/8Aj6i/3W/pWtKHLG7LhGyuzO1SPbcBx0cfqKpVuXcH2iAp/EOVPvWIwKsVYYI4INY1ocsr9zOpGzuIAScDkmrUFhNIw3qY17k9arAFiAoyTwK6BAQihjkgDNOjTU9x04qW4qgKoUcADApaKK7TpCiiigAooooAKim4khb0fH5jFS1HOheFlH3sZH1HSlLYT2JKgntYZzl1+b1HBqWNxJGrjowzTqGlJahZNEEFpDAdyLlvUnNT0UUJJaIEktgooopjCiiigAooooAKKKKAIU/dTGM/df5k+vcf1qamSxiRNpOO4I6g+tJE7NlHGHXr6H3FJaaC20JKKKKYwooooA//2Q==',
+      text:'A GOLD result occurs with a probability of 10 percent. There is no useful choice to make. Press the button when the moment seems acceptable. Waiting longer does not change the probability, although many people still do it.'
+    }
+  ];
+
+  const totalTrials = sections.reduce((a,s)=>a+s.count,0);
+  const TIME_LIMIT = 300;
+
+  let trialIndex=0;
+  let answered=false;
+  let records=[];
+  let timeLeft=TIME_LIMIT;
+  let timerHandle=null;
+  let lastSectionKey=null;
+  let testStarted=false;
+
+  const $=id=>document.getElementById(id);
+
+  function randInt(max){
+    const lim=Math.floor(0x100000000/max)*max;
+    const a=new Uint32Array(1);
+    do crypto.getRandomValues(a); while(a[0]>=lim);
+    return a[0]%max;
+  }
+
+  function sectionFor(index){
+    let n=index;
+    for(const s of sections){
+      if(n<s.count)return {...s,local:n};
+      n-=s.count;
+    }
+    return null;
+  }
+
+  function updateTimer(){
+    const m=Math.floor(timeLeft/60);
+    const s=timeLeft%60;
+    $('timer').textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+  }
+
+  function startClock(){
+    if(timerHandle)return;
+    timerHandle=setInterval(()=>{
+      timeLeft--;
+      updateTimer();
+      if(timeLeft<=0){
+        clearInterval(timerHandle);
+        timerHandle=null;
+        showResults(true);
+      }
+    },1000);
+  }
+
+  function stopClock(){
+    if(timerHandle){
+      clearInterval(timerHandle);
+      timerHandle=null;
+    }
+  }
+
+  function showSectionIntro(section){
+    $('home').classList.add('hidden');
+    $('test').classList.add('hidden');
+    $('results').classList.add('hidden');
+    $('infoPage').classList.add('hidden');
+    $('sectionIntro').classList.remove('hidden');
+
+    const secNo=sections.findIndex(s=>s.key===section.key)+1;
+    $('sectionCode').textContent='SECTION '+secNo+' OF '+sections.length;
+    $('introTitle').textContent=section.title;
+    $('introText').innerHTML=section.text;
+    $('introImg').src=section.img;
+    lastSectionKey=section.key;
+  }
+
+  function addChoice(label,fn){
+    const b=document.createElement('button');
+    b.className='choice';
+    b.textContent=label;
+    b.addEventListener('click',fn);
+    $('choices').appendChild(b);
+  }
+
+  function disableChoices(){
+    [...$('choices').querySelectorAll('button')].forEach(b=>b.disabled=true);
+  }
+
+  function addRecord(section,success){
+    const p=section.p;
+    const x=success?1:0;
+    const score=(x-p)/Math.sqrt(p*(1-p));
+    records.push({section:section.key,success,p,score});
+  }
+
+  function finishTrial(section,success,message){
+    if(answered)return;
+    answered=true;
+    disableChoices();
+    addRecord(section,success);
+    $('trialResult').textContent=message;
+    $('trialResult').className=success?'good':'bad';
+    $('nextBtn').classList.remove('hidden');
+    $('nextBtn').textContent=trialIndex===totalTrials-1?'View Result':'Next';
+  }
+
+  function resolveChoice(section,chosen,actual){
+    const success=chosen===actual;
+    if(section.key==='dice'){
+      finishTrial(section,success,success?`Correct. The die rolled ${actual}.`:`Miss. The die rolled ${actual}.`);
+    }else if(section.key==='card'){
+      finishTrial(section,success,success?`Lucky. Card ${actual+1} was the winning card.`:`Miss. Card ${actual+1} was the winning card.`);
+    }else{
+      const name=actual===0?'A':'B';
+      finishTrial(section,success,success?`Lucky. ${name} was correct.`:`Miss. ${name} was correct.`);
+    }
+  }
+
+  function resolveAvoid(section,chosen,trap){
+    const success=chosen!==trap;
+    finishTrial(section,success,success?`Safe. The trap was ${trap+1}.`:'You selected the trap.');
+  }
+
+  function resolveRare(section,success){
+    finishTrial(section,success,success?'GOLD appeared.':'NORMAL result.');
+  }
+
+  function showTest(section){
+    $('home').classList.add('hidden');
+    $('sectionIntro').classList.add('hidden');
+    $('results').classList.add('hidden');
+    $('infoPage').classList.add('hidden');
+    $('test').classList.remove('hidden');
+
+    if(!testStarted){
+      testStarted=true;
+      startClock();
+    }
+    updateTimer();
+
+    $('trialResult').textContent='';
+    $('trialResult').className='';
+    $('nextBtn').classList.add('hidden');
+    $('choices').innerHTML='';
+    answered=false;
+
+    const n=trialIndex+1;
+    const secNo=sections.findIndex(s=>s.key===section.key)+1;
+    $('sectionName').textContent=`Section ${secNo} of 5: ${section.name}`;
+    $('progressText').textContent=`${n} / ${totalTrials}`;
+    $('sectionProgressText').textContent=`${section.local+1} / ${section.count}`;
+    $('progressBar').style.width=`${(trialIndex/totalTrials)*100}%`;
+    $('qno').textContent=`Question ${n}`;
+
+    if(section.key==='binary'){
+      $('prompt').textContent='Choose the side you think is lucky.';
+      addChoice('A',()=>resolveChoice(section,0,randInt(2)));
+      addChoice('B',()=>resolveChoice(section,1,randInt(2)));
+    }
+    if(section.key==='card'){
+      $('prompt').textContent='Choose one card.';
+      for(let i=0;i<4;i++)addChoice(String(i+1),()=>resolveChoice(section,i,randInt(4)));
+    }
+    if(section.key==='dice'){
+      $('prompt').textContent='Guess the next roll.';
+      for(let i=1;i<=6;i++)addChoice(String(i),()=>resolveChoice(section,i,randInt(6)+1));
+    }
+    if(section.key==='avoid'){
+      $('prompt').textContent='One of these five choices is a trap. Pick a safe one.';
+      for(let i=0;i<5;i++)addChoice(String(i+1),()=>resolveAvoid(section,i,randInt(5)));
+    }
+    if(section.key==='rare'){
+      $('prompt').textContent='There is a 10% chance of GOLD.';
+      addChoice('Try',()=>resolveRare(section,randInt(10)===0));
+    }
+  }
+
+  function normCdf(z){
+    const sign=z<0?-1:1;
+    z=Math.abs(z)/Math.sqrt(2);
+    const t=1/(1+0.3275911*z);
+    const a1=0.254829592,a2=-0.284496736,a3=1.421413741,a4=-1.453152027,a5=1.061405429;
+    const erf=1-(((((a5*t+a4)*t)+a3)*t+a2)*t+a1)*t*Math.exp(-z*z);
+    return 0.5*(1+sign*erf);
+  }
+
+  function descriptor(lq){
+    if(lq>=145)return'Extremely Lucky';
+    if(lq>=130)return'Very Lucky';
+    if(lq>=115)return'Lucky';
+    if(lq>=85)return'Average';
+    if(lq>=70)return'Unlucky';
+    if(lq>=55)return'Very Unlucky';
+    return'Extremely Unlucky';
+  }
+
+  function computeLQ(arr){
+    if(!arr.length)return 100;
+    const sum=arr.reduce((a,r)=>a+r.score,0);
+    return 100+15*(sum/Math.sqrt(arr.length));
+  }
+
+  function renderBell(lq){
+    const left=48,right=712,base=195,xMin=40,xMax=160;
+    const sx=v=>left+(v-xMin)/(xMax-xMin)*(right-left);
+    const sy=v=>base-v*145;
+    let d='';
+    for(let x=xMin;x<=xMax;x++){
+      const z=(x-100)/15;
+      const y=Math.exp(-.5*z*z);
+      d+=(x===xMin?'M':'L')+sx(x).toFixed(1)+' '+sy(y).toFixed(1)+' ';
+    }
+    $('bellPath').setAttribute('d',d);
+    const mx=sx(Math.max(xMin,Math.min(xMax,lq)));
+    $('markerLine').setAttribute('x1',mx);
+    $('markerLine').setAttribute('x2',mx);
+    $('markerTri').setAttribute('points',`${mx-6},34 ${mx+6},34 ${mx},43`);
+    $('markerText').setAttribute('x',mx);
+
+    const ticks=$('ticks');
+    ticks.innerHTML='';
+    [55,70,85,100,115,130,145].forEach(v=>{
+      const x=sx(v);
+      const line=document.createElementNS('http://www.w3.org/2000/svg','line');
+      line.setAttribute('x1',x);line.setAttribute('x2',x);
+      line.setAttribute('y1',195);line.setAttribute('y2',201);
+      line.setAttribute('stroke','#555');ticks.appendChild(line);
+      const text=document.createElementNS('http://www.w3.org/2000/svg','text');
+      text.setAttribute('x',x);text.setAttribute('y',218);
+      text.setAttribute('text-anchor','middle');text.setAttribute('font-size','12');
+      text.textContent=v;ticks.appendChild(text);
+    });
+  }
+
+  function showResults(timedOut=false){
+    stopClock();
+    $('home').classList.add('hidden');
+    $('sectionIntro').classList.add('hidden');
+    $('test').classList.add('hidden');
+    $('infoPage').classList.add('hidden');
+    $('results').classList.remove('hidden');
+
+    const raw=computeLQ(records);
+    const lq=Math.round(raw);
+    $('lqNumber').textContent=lq;
+    $('lqDesc').textContent=descriptor(lq);
+
+    const z=(raw-100)/15;
+    const pct=normCdf(z)*100;
+    let txt;
+    if(raw>=100){
+      const upper=100-pct;
+      txt=`About ${upper<0.01?'<0.01':upper.toFixed(2)}% of results are expected to score this high or higher.`;
+    }else{
+      txt=`About ${pct<0.01?'<0.01':pct.toFixed(2)}% of results are expected to score this low or lower.`;
+    }
+    if(timedOut) txt='TIME LIMIT REACHED. '+txt;
+    $('percentileText').textContent=txt;
+
+    renderBell(raw);
+
+    const rows=$('categoryRows');
+    rows.innerHTML='';
+    sections.forEach(sec=>{
+      const arr=records.filter(r=>r.section===sec.key);
+      const clq=Math.round(computeLQ(arr));
+      const wins=arr.filter(r=>r.success).length;
+      const tr=document.createElement('tr');
+      tr.innerHTML=`<td>${sec.name}<div class="bar"><span style="width:${Math.max(0,Math.min(100,(clq-40)/120*100))}%"></span></div></td><td>${clq}</td><td>${wins} / ${arr.length}</td>`;
+      rows.appendChild(tr);
+    });
+  }
+
+  $('startBtn').addEventListener('click',()=>{
+    trialIndex=0;records=[];timeLeft=TIME_LIMIT;lastSectionKey=null;testStarted=false;
+    stopClock();
+    showSectionIntro(sectionFor(0));
+  });
+
+  $('beginSectionBtn').addEventListener('click',()=>{
+    showTest(sectionFor(trialIndex));
+  });
+
+  $('nextBtn').addEventListener('click',()=>{
+    if(!answered)return;
+    trialIndex++;
+    if(trialIndex>=totalTrials){
+      showResults(false);
+      return;
+    }
+    const next=sectionFor(trialIndex);
+    if(next.key!==lastSectionKey)showSectionIntro(next);
+    else showTest(next);
+  });
+
+  $('restartBtn').addEventListener('click',()=>{
+    trialIndex=0;records=[];timeLeft=TIME_LIMIT;lastSectionKey=null;testStarted=false;
+    stopClock();
+    showSectionIntro(sectionFor(0));
+    window.scrollTo(0,0);
+  });
+
+  window.showHome=()=>{
+    stopClock();
+    $('test').classList.add('hidden');
+    $('sectionIntro').classList.add('hidden');
+    $('results').classList.add('hidden');
+    $('infoPage').classList.add('hidden');
+    document.querySelectorAll('.infoSection').forEach(el=>el.classList.add('hidden'));
+    $('home').classList.remove('hidden');
+    window.scrollTo(0,0);
+  };
+
+  window.showInfo=(id)=>{
+    stopClock();
+    $('home').classList.add('hidden');
+    $('test').classList.add('hidden');
+    $('sectionIntro').classList.add('hidden');
+    $('results').classList.add('hidden');
+    $('infoPage').classList.remove('hidden');
+    document.querySelectorAll('.infoSection').forEach(el=>el.classList.add('hidden'));
+    $(id).classList.remove('hidden');
+    window.scrollTo(0,0);
+  };
+})();
+</script>
+</body>
+</html>
